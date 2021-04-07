@@ -6,10 +6,9 @@ import { CAMPSITES } from '../shared/campsites';
 class Directory extends Component {
 
     constructor(props) {
-        super (props);
-
-        this.state ={
-            campsites: CAMPSITES,
+        super(props);
+        this.state = {
+            campsites: CAMPSITES
         };
     }
 
@@ -19,28 +18,25 @@ class Directory extends Component {
 
     render() {
         const { navigate } = this.props.navigation;
-
-        const renderDirectorItem = ({item}) => {
+        const renderDirectoryItem = ({item}) => {
             return (
-                <ListItem 
+                <ListItem
                     title={item.name}
                     subtitle={item.description}
-                    onPress={() => navigate('CampsiteInfo', {campsiteId: item.id})}
+                    onPress={() => navigate('CampsiteInfo', { campsiteId: item.id })}
                     leftAvatar={{ source: require('./images/react-lake.jpg')}}
                 />
-            )
-        }
+            );
+        };
 
         return (
-            <FlatList 
+            <FlatList
                 data={this.state.campsites}
-                renderItem={renderDirectorItem}
+                renderItem={renderDirectoryItem}
                 keyExtractor={item => item.id.toString()}
             />
-        )
+        );
     }
-    
-    
 }
 
 export default Directory;

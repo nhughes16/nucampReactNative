@@ -4,9 +4,10 @@ import { Card } from 'react-native-elements';
 import { CAMPSITES } from '../shared/campsites';
 
 function RenderCampsite({campsite}) {
+
     if (campsite) {
         return (
-            <Card 
+            <Card
                 featuredTitle={campsite.name}
                 image={require('./images/react-lake.jpg')}
             >
@@ -23,14 +24,13 @@ class CampsiteInfo extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
-            campsites: CAMPSITES,
-        }
+            campsites: CAMPSITES
+        };
     }
 
     static navigationOptions = {
-        title: 'Campsite Infromation'
+        title: 'Campsite Information'
     }
 
     render() {
@@ -38,7 +38,6 @@ class CampsiteInfo extends Component {
         const campsite = this.state.campsites.filter(campsite => campsite.id === campsiteId)[0];
         return <RenderCampsite campsite={campsite} />;
     }
-    
 }
 
 export default CampsiteInfo;
