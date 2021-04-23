@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, FlatList } from 'react-native'
+import { View, FlatList, Text } from 'react-native'
 import { Tile } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { baseUrl } from '../shared/baseUrl'
 import Loading from './LoadingComponent'
+import * as Animateable from 'react-native-animatable'
 
 const mapStateToProps = (state) => {
 	return {
@@ -19,7 +20,17 @@ class Directory extends Component {
 	render() {
 		const { navigate } = this.props.navigation
 		const renderDirectoryItem = ({ item }) => {
-			return <Tile title={item.name} caption={item.description} featured onPress={() => navigate('CampsiteInfo', { campsiteId: item.id })} imageSrc={{ uri: baseUrl + item.image }} />
+			return (
+				<Animateable.View animation="fadeInRightBig" duration={2000}>
+					<Tile
+						title={item.name}
+						caption={item.description}
+						featured
+						onPress={() => navigate('CampsiteInfo', { campsiteId: item.id })}
+						imageSrc={{ uri: baseUrl + item.image }}
+					/>
+				</Animateable.View>
+			)
 		}
 
 		if (this.props.campsites.isLoading) {
@@ -28,7 +39,7 @@ class Directory extends Component {
 		if (this.props.campsites.errMess) {
 			return (
 				<View>
-					<Text>{props.campsites.errMess}</Text>
+					<Text>{this.props.campsites.errMess}</Text>
 				</View>
 			)
 		}
