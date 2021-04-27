@@ -24,7 +24,9 @@ function RenderCampsite(props) {
 
 	const view = React.createRef()
 
-	const recognizeDrag = ({ dx }) => (dx < -200 ? true : false)
+	const recognizeDrag = ({ dx }) => dx < -200
+
+	const recognizeComment = ({ dx }) => dx > 200
 
 	const panResponder = PanResponder.create({
 		onStartShouldSetPanResponder: () => true,
@@ -51,7 +53,9 @@ function RenderCampsite(props) {
 					{ cancelable: false },
 				)
 			}
-			return true
+			if (recognizeComment(gestureState)) {
+				props.onShowModal()
+			}
 		},
 	})
 
